@@ -61,9 +61,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-//        return productRepository.findAll();
         return productRepository.findAll();
-//        return products.stream().map(product -> ProductResponse.builder()
+//        return products.stream().map(product -> ProductResponse.builder()// using collection to get all
 //                .id(product.getId())
 //                .nameProduct(product.getName())
 //                .description(product.getDescription())

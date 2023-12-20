@@ -37,8 +37,6 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreResponse getById(String id) {
         Store store = storeRepository.findById(id).orElse(null);
-
-        assert store != null;
         return StoreResponse.builder()
                 .id(store.getId())
                 .storeName(store.getName())
@@ -63,7 +61,6 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public StoreResponse update(StoreRequest storeRequest) {
         Store store = storeRepository.findById(storeRequest.getId()).orElse(null);
-        assert store != null;
         store.setId(storeRequest.getId());
         store.setName(storeRequest.getName());
         store.setAddress(storeRequest.getAddress());

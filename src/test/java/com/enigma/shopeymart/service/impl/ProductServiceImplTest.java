@@ -24,9 +24,10 @@ class ProductServiceImplTest {
     private final StoreService storeService = mock(StoreService.class);
     private final ProductService productService = new ProductServiceImpl(productRepository, storeService, productPriceService);
 
+    //todo set up and reset object before testing
     @BeforeEach
-    public void setUp(){
-        reset(productRepository,storeService,productPriceService);
+    public void setUp() {
+        reset(productRepository, storeService, productPriceService);
     }
 
     @Test
@@ -40,7 +41,7 @@ class ProductServiceImplTest {
         when(storeService.getById(anyString())).thenReturn(dummyStoreResponse);
 
         //mock product that will be safe
-        Product saveProduct =new Product();
+        Product saveProduct = new Product();
         saveProduct.setId("product1");
         saveProduct.setName("Biskuat");
         saveProduct.setDescription("Macan naon? macan biskuat");
@@ -49,7 +50,7 @@ class ProductServiceImplTest {
         //data ddummy request
         ProductRequest dummyProductRequest = mock(ProductRequest.class);
         when(dummyProductRequest.getStoreId()).thenReturn(StoreResponse.builder()
-                        .id("store1")
+                .id("store1")
                 .build());
         when(dummyProductRequest.getName()).thenReturn(saveProduct.getName());
         when(dummyProductRequest.getDsc()).thenReturn(saveProduct.getDescription());
@@ -66,15 +67,15 @@ class ProductServiceImplTest {
         assertEquals(saveProduct.getName(), productResponse.getNameProduct());
 
         //vaidate
-        assertEquals(dummyProductRequest.getPrice(),productResponse.getPrice());
-        assertEquals(dummyProductRequest.getStock(),productResponse.getStock());
+        assertEquals(dummyProductRequest.getPrice(), productResponse.getPrice());
+        assertEquals(dummyProductRequest.getStock(), productResponse.getStock());
 
         //validate inetraction with store
-        assertEquals(dummyProductRequest.getPrice(),productResponse.getPrice());
-        assertEquals(dummyProductRequest.getStock(),productResponse.getStock());
+        assertEquals(dummyProductRequest.getPrice(), productResponse.getPrice());
+        assertEquals(dummyProductRequest.getStock(), productResponse.getStock());
 
         //validate intracton with store
-        assertEquals(dummyStoreResponse.getId(),productResponse.getStore().getId());
+        assertEquals(dummyStoreResponse.getId(), productResponse.getStore().getId());
 
         //verifu interaction with mock object
         verify(storeService).getById(anyString());

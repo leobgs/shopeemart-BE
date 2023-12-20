@@ -27,12 +27,12 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(CommonResponse.<ProductResponse>builder()
                         .statusCode(HttpStatus.CREATED.value())
-                        .message("Succesfully")
+                        .message("Succesfully created new product")
                         .data(productResponse)
                         .build());
     }
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public List<Product>getAllProduct(){
         return productService.getAll();
     }
