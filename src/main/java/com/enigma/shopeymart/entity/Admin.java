@@ -18,10 +18,10 @@ public class Admin {
     @Column(name = "admin_name", nullable = false, length = 150)
     private String name;
 
-    @Column(name = "phone_number", unique = true, nullable = false,length = 20)
+    @Column(name = "mobile_phone_no", unique = true, nullable = false, length = 20)
     private String phoneNumber;
 
-    @Column(name = "email", unique = true, nullable = false,length = 100)
+    @Column(name = "email", unique = true, nullable = false, length = 100)
     private String email;
 
     @OneToOne

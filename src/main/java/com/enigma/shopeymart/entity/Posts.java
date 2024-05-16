@@ -20,6 +20,6 @@ public class Posts {
     private String title;
     private String body;
     @Column(name = "user_id")
-    private  Integer userId;
+    private  String userId;
 
 }

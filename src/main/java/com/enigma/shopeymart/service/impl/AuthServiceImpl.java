@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
             Customer customer = Customer.builder()
                     .userCredentials(userCredentials)
                     .email(request.getEmail())
-                    .name(request.getCustomerName())
+                    .name(request.getFullName())
                     .phone(request.getMobilePhone())
                     .build();
             customerService.createNewCustomer(customer);
@@ -110,7 +110,7 @@ public class AuthServiceImpl implements AuthService {
             Admin admin = Admin.builder()
                     .userCredentials(userCredentials)
                     .email(authRequest.getEmail())
-                    .name(authRequest.getCustomerName())
+                    .name(authRequest.getFullName())
                     .phoneNumber(authRequest.getMobilePhone())
                     .build();
             adminRepository.save(admin);

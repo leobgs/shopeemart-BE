@@ -32,7 +32,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 token = headerAuth.substring(7);
             }
             if (token != null && jwtUtil.verifyJwtToken(token)) {
-                //set auth ke pring security
+                //set auth ke spring security
                 Map<String, String> userInfo = jwtUtil.getUserInfoByToken(token);
                 UserDetails user = userService.loadUserByUserId(userInfo.get("userId"));
                 //validasi token

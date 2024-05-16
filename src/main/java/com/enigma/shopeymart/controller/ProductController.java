@@ -22,7 +22,8 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-        public ResponseEntity<?> createProduct(@RequestBody ProductRequest productRequest) {
+//    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createProduct(@RequestBody ProductRequest productRequest) {
         ProductResponse productResponse = productService.createProductAndProductPrice(productRequest);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(CommonResponse.<ProductResponse>builder()
@@ -31,31 +32,31 @@ public class ProductController {
                         .data(productResponse)
                         .build());
     }
+
     @GetMapping
-//    @PreAuthorize("hasRole('ADMIN')")
-    public List<Product>getAllProduct(){
+    public List<Product> getAllProduct() {
         return productService.getAll();
     }
 
     @GetMapping("/page")
-    public ResponseEntity<?>getAllProductsPage(
-            @RequestParam(name = "name",required = false)String name,
-            @RequestParam(name = "maxPrice", required = false)Long maxPrice,
-            @RequestParam(name = "page", required = false, defaultValue = "0")Integer page,
-            @RequestParam(name = "size", required = false, defaultValue = "5")Integer size
-    ){
-        Page<ProductResponse>productResponses = productService.getAllByNameOrPrice(name,maxPrice,page,size);
+    public ResponseEntity<?> getAllProductsPage(
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "maxPrice", required = false) Long maxPrice,
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = "5") Integer size
+    ) {
+        Page<ProductResponse> productResponses = productService.getAllByNameOrPrice(name, maxPrice, page, size);
         PagingResponse pagingResponse = PagingResponse.builder()
                 .currentPage(page)
                 .totalPage(productResponses.getTotalPages())
                 .size(size)
                 .build();
-    return ResponseEntity.status(HttpStatus.CREATED)
-            .body(CommonResponse.builder()
-                    .statusCode(HttpStatus.CREATED.value())
-                    .message("Succesfully get all products")
-                    .data(productResponses)
-                    .paging(pagingResponse)
-                    .build());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(CommonResponse.builder()
+                        .statusCode(HttpStatus.CREATED.value())
+                        .message("Succesfully get all products")
+                        .data(productResponses)
+                        .paging(pagingResponse)
+                        .build());
     }
 }

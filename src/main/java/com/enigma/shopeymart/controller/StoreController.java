@@ -4,7 +4,6 @@ package com.enigma.shopeymart.controller;
 import com.enigma.shopeymart.constant.AppPath;
 import com.enigma.shopeymart.dto.request.StoreRequest;
 import com.enigma.shopeymart.dto.response.StoreResponse;
-import com.enigma.shopeymart.entity.Store;
 import com.enigma.shopeymart.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -53,7 +52,7 @@ public class StoreController {
         return storeService.getById(id);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<StoreResponse> getAllStore() {
         return storeService.getAll();
     }

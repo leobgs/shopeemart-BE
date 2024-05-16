@@ -5,10 +5,7 @@ import com.enigma.shopeymart.dto.response.LoginResponse;
 import com.enigma.shopeymart.dto.response.RegisterResponse;
 import com.enigma.shopeymart.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth/")
@@ -16,19 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
 
-    @PostMapping()
-    public RegisterResponse response(@RequestBody AuthRequest authRequest) {
-        return authService.registerCustomer(authRequest);
-    }
-
     @PostMapping("login")
     public LoginResponse loginResponse(@RequestBody AuthRequest authRequest) {
         return authService.loginCustomer(authRequest);
     }
 
-    @PostMapping("admin")
+    @PostMapping("register/admin")
     public RegisterResponse responseAdmin(@RequestBody AuthRequest authRequest) {
         return authService.registerAdmin(authRequest);
+    }
+
+    @PostMapping("register/customer")
+    public RegisterResponse response(@RequestBody AuthRequest authRequest) {
+        return authService.registerCustomer(authRequest);
     }
 
 }
